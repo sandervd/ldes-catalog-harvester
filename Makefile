@@ -1,25 +1,55 @@
 tracked-catalogs = $(wildcard catalogs/*)
 catalogs := $(subst catalogs, workspace/dcat, $(tracked-catalogs))
-catalogs-dcat-rdf := $(patsubst %,%/dcat.nt,$(catalogs))
-first: workspace/catalog.nt
-	$(info    VAR is $(catalogs-dcat-rdf))
+catalogs-dcat-rdf := $(patsubst %,%/validated.nt,$(catalogs))
 
 workspace/catalog.nt: $(catalogs-dcat-rdf)
-	cat $(catalogs-dcat-rdf) > workspace/catalog.nt
+	cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog.nt
 
-workspace/dcat/%/dcat.nt: workspace/dcat/%/original.nt
-	#./shacl/bin/shaclvalidate.sh -datafile $(^) -shapesfile schemas/dcatapvl.ttl > workspace/dcat/$(*F)/report.ttl
+workspace/dcat/%/validated.nt: workspace/dcat/%/inferred.nt schemas/dcatapvl.ttl
 	./bin/validate.sh $(*F)
 
-workspace/dcat/%/original.nt: workspace/dcat/%/original apache-jena ./bin/normalise.sh
+workspace/dcat/%/inferred.nt: workspace/dcat/%/infer-1.nt
+	cp $(<) $(<D)/inferred.nt
+
+
+#workspace/dcat/%/infer-3.nt: workspace/dcat/%/infer-2.nt schemas/infer/3.rq
+#	 ./apache-jena/bin/update --data $(<) --file schemas/infer/3.rq --dump > $@
+
+#workspace/dcat/%/infer-2.nt: workspace/dcat/%/infer-1.nt schemas/infer/2.rq
+#	 ./apache-jena/bin/update --data $(<) --file schemas/infer/2.rq --dump > $@
+
+workspace/dcat/%/infer-1.nt: workspace/dcat/%/normalised.nt schemas/infer/1.rq
+	mkdir -p schemas/infer
+	./apache-jena/bin/update --data $(<) --file schemas/infer/1.rq --dump > $@
+
+workspace/dcat/%/normalised.nt: workspace/dcat/%/original apache-jena bin/normalise.sh
 	./bin/normalise.sh $(*F)
 
 workspace/dcat/%/original: catalogs/% ./bin/download.sh
 	mkdir -p workspace/dcat/$(*F)
 	./bin/download.sh $(^) > $@
 
-schemas/dcatapvl.ttl: schemas/dcatapvl.jsonld
-	./apache-jena/bin/riot --formatted=turtle schemas/dcatapvl.jsonld > schemas/dcatapvl.ttl
+schemas/dcatapvl.ttl: workspace/schema/5.ttl
+	cp workspace/schema/5.ttl schemas/dcatapvl.ttl
+
+workspace/schema/5.ttl: workspace/schema/4.ttl schemas/changes/5.rq
+	./apache-jena/bin/update --data workspace/schema/4.ttl --update schemas/changes/5.rq --dump > workspace/schema/5.ttl
+
+workspace/schema/4.ttl: workspace/schema/3.ttl schemas/changes/4.rq
+	./apache-jena/bin/update --data workspace/schema/3.ttl --update schemas/changes/4.rq --dump > workspace/schema/4.ttl
+
+workspace/schema/3.ttl: workspace/schema/2.ttl schemas/changes/3.rq
+	./apache-jena/bin/update --data workspace/schema/2.ttl --update schemas/changes/3.rq --dump > workspace/schema/3.ttl
+
+workspace/schema/2.ttl: workspace/schema/1.ttl schemas/changes/2.rq
+	./apache-jena/bin/update --data workspace/schema/1.ttl --update schemas/changes/2.rq --dump > workspace/schema/2.ttl
+
+workspace/schema/1.ttl: schemas/dcatap-normalised.ttl schemas/changes/1.rq
+	mkdir -p workspace/schema
+	./apache-jena/bin/update --data schemas/dcatap-normalised.ttl --update schemas/changes/1.rq --dump > workspace/schema/1.ttl
+
+schemas/dcatap-normalised.ttl: schemas/dcatapvl.jsonld
+	./apache-jena/bin/riot --formatted=turtle schemas/dcatapvl.jsonld > schemas/dcatap-normalised.ttl
 
 schemas/dcatapvl.jsonld:
 	mkdir -p schemas
@@ -46,6 +76,6 @@ shacl:
 	chmod +x shacl/bin/shaclvalidate.sh
 
 # Keep intermediate files for performance.
-.PRECIOUS: workspace/dcat/%/original workspace/dcat/%/original.nt workspace/dcat/%/dcat.nt 
+.PRECIOUS: workspace/dcat/%/original workspace/dcat/%/normalised.nt workspace/dcat/%/dcat.nt workspace/dcat/%/inferred.nt
 # For performance, no need to process old suffix rules.
 .SUFFIXES: 
