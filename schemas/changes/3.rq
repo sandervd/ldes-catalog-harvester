@@ -1,0 +1,12 @@
+# https://github.com/Informatievlaanderen/OSLOthema-DCATAPVlaanderen/issues/16
+
+
+PREFIX qb:   <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sh:   <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX vl:   <https://data.vlaanderen.be/ns/shacl#>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
+
+INSERT {<https://data.vlaanderen.be/shacl/DCAT-AP-VL#DatasetShape/dea743ba34d85e4615aa135025555bb2247c99e0> sh:deactivated true }
+WHERE {}

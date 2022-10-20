@@ -1,0 +1,21 @@
+prefix qb:   <http://purl.org/linked-data/cube#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix sh:   <http://www.w3.org/ns/shacl#> 
+prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+prefix v:    <http://www.w3.org/2006/vcard/ns#> 
+prefix vl:   <https://data.vlaanderen.be/ns/shacl#> 
+prefix dcat: <http://www.w3.org/ns/dcat#> 
+prefix dct:  <http://purl.org/dc/terms/>
+
+INSERT {
+	?ds dct:identifier ?identifier
+}
+WHERE {
+	VALUES ?type {dcat:Dataset dcat:Catalog dcat:DataService} .
+	?ds a ?types .
+	OPTIONAL {?ds dct:identifier ?id }
+	#OPTIONAL {?ds dct:identifier ?identifier }
+	FILTER(!bound(?id) )
+	BIND(STR(?ds) as ?identifier)
+}
+
