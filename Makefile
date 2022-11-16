@@ -5,7 +5,7 @@ catalogs-dcat-rdf := $(patsubst %,%/validated.nt,$(catalogs))
 workspace/catalog.nt: $(catalogs-dcat-rdf)
 	cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog.nt
 
-workspace/dcat/%/validated.nt: workspace/dcat/%/inferred.nt schemas/dcatapvl.ttl
+workspace/dcat/%/validated.nt: shacl workspace/dcat/%/inferred.nt schemas/dcatapvl.ttl
 	./bin/validate.sh $(*F)
 
 workspace/dcat/%/inferred.nt: workspace/dcat/%/infer-2.nt
