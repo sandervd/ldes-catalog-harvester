@@ -1,4 +1,6 @@
+# Change 4
 # https://github.com/Informatievlaanderen/OSLOthema-DCATAPVlaanderen/issues/14
+# Dataset - dct:accessRights range incorrect
 
 
 PREFIX qb:   <http://purl.org/linked-data/cube#>

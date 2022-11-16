@@ -5,7 +5,7 @@ set +e
 if [ $? -ne 0 ]
 then
 	# Catalog is not conformant.
-	./apache-jena/bin/sparql --data=workspace/dcat/$catalog/report.ttl --query=shacl-report.rq --results=text
+	./apache-jena/bin/sparql --data=workspace/dcat/$catalog/report.ttl --query=schemas/shacl-report.rq --results=text
 	exit 1
 else
 	# Include this catalog in the combined catalog.

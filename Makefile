@@ -8,19 +8,19 @@ workspace/catalog.nt: $(catalogs-dcat-rdf)
 workspace/dcat/%/validated.nt: workspace/dcat/%/inferred.nt schemas/dcatapvl.ttl
 	./bin/validate.sh $(*F)
 
-workspace/dcat/%/inferred.nt: workspace/dcat/%/infer-1.nt
+workspace/dcat/%/inferred.nt: workspace/dcat/%/infer-2.nt
 	cp $(<) $(<D)/inferred.nt
 
 
 #workspace/dcat/%/infer-3.nt: workspace/dcat/%/infer-2.nt schemas/infer/3.rq
 #	 ./apache-jena/bin/update --data $(<) --file schemas/infer/3.rq --dump > $@
 
-#workspace/dcat/%/infer-2.nt: workspace/dcat/%/infer-1.nt schemas/infer/2.rq
-#	 ./apache-jena/bin/update --data $(<) --file schemas/infer/2.rq --dump > $@
+workspace/dcat/%/infer-2.nt: workspace/dcat/%/infer-1.nt schemas/infer/2.rq
+	./apache-jena/bin/update --data $(<) --update schemas/infer/2.rq --dump | ./apache-jena/bin/turtle > $@
 
 workspace/dcat/%/infer-1.nt: workspace/dcat/%/normalised.nt schemas/infer/1.rq
 	mkdir -p schemas/infer
-	./apache-jena/bin/update --data $(<) --file schemas/infer/1.rq --dump > $@
+	./apache-jena/bin/update --data $(<) --update schemas/infer/1.rq --dump | ./apache-jena/bin/turtle > $@
 
 workspace/dcat/%/normalised.nt: workspace/dcat/%/original apache-jena bin/normalise.sh
 	./bin/normalise.sh $(*F)
@@ -29,8 +29,14 @@ workspace/dcat/%/original: catalogs/% ./bin/download.sh
 	mkdir -p workspace/dcat/$(*F)
 	./bin/download.sh $(^) > $@
 
-schemas/dcatapvl.ttl: workspace/schema/5.ttl
-	cp workspace/schema/5.ttl schemas/dcatapvl.ttl
+schemas/dcatapvl.ttl: workspace/schema/7.ttl
+	cp workspace/schema/7.ttl schemas/dcatapvl.ttl
+
+workspace/schema/7.ttl: workspace/schema/6.ttl schemas/changes/7.rq
+	./apache-jena/bin/update --data workspace/schema/6.ttl --update schemas/changes/7.rq --dump > workspace/schema/7.ttl
+
+workspace/schema/6.ttl: workspace/schema/5.ttl schemas/changes/6.rq
+	./apache-jena/bin/update --data workspace/schema/5.ttl --update schemas/changes/6.rq --dump > workspace/schema/6.ttl
 
 workspace/schema/5.ttl: workspace/schema/4.ttl schemas/changes/5.rq
 	./apache-jena/bin/update --data workspace/schema/4.ttl --update schemas/changes/5.rq --dump > workspace/schema/5.ttl
@@ -76,6 +82,6 @@ shacl:
 	chmod +x shacl/bin/shaclvalidate.sh
 
 # Keep intermediate files for performance.
-.PRECIOUS: workspace/dcat/%/original workspace/dcat/%/normalised.nt workspace/dcat/%/dcat.nt workspace/dcat/%/inferred.nt
+.PRECIOUS: workspace/dcat/%/original workspace/dcat/%/normalised.nt workspace/dcat/%/dcat.nt workspace/dcat/%/inferred.nt workspace/dcat/%/infer-1.nt workspace/dcat/%/infer-2.nt
 # For performance, no need to process old suffix rules.
 .SUFFIXES: 

@@ -1,4 +1,6 @@
+# Change 1
 # https://github.com/Informatievlaanderen/OSLOthema-DCATAPVlaanderen/issues/13
+# Dataset - range of http://www.w3.org/ns/dcat#contactPoint incorrect
 
 
 PREFIX qb:   <http://purl.org/linked-data/cube#>

@@ -1,6 +1,6 @@
-# Change 3
-# https://github.com/Informatievlaanderen/OSLOthema-DCATAPVlaanderen/issues/16
-# Dataset - dct:identifier has conflicting rules
+# Change 6
+# https://github.com/Informatievlaanderen/OSLOthema-DCATAPVlaanderen/issues/19
+# Range validation of dct:conformsTo
 
 
 PREFIX qb:   <http://purl.org/linked-data/cube#>
@@ -10,5 +10,5 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX vl:   <https://data.vlaanderen.be/ns/shacl#>
 PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
 
-INSERT {<https://data.vlaanderen.be/shacl/DCAT-AP-VL#DatasetShape/dea743ba34d85e4615aa135025555bb2247c99e0> sh:deactivated true }
+INSERT {<https://data.vlaanderen.be/shacl/DCAT-AP-VL#DatasetShape/1b8b3557ea1ccbabc0962c345782ae53740e72e1> sh:deactivated true }
 WHERE {}
