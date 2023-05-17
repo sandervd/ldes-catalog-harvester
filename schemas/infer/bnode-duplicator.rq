@@ -1,0 +1,39 @@
+prefix qb:   <http://purl.org/linked-data/cube#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix sh:   <http://www.w3.org/ns/shacl#> 
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix v:    <http://www.w3.org/2006/vcard/ns#>
+prefix vl:   <https://data.vlaanderen.be/ns/shacl#>
+prefix dcat: <http://www.w3.org/ns/dcat#>
+prefix dct:  <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix mdcat: <https://data.vlaanderen.be/ns/metadata-dcat#>
+prefix loc:  <http://www.w3.org/ns/locn#>
+prefix schema: <http://schema.org/>
+
+DELETE {
+  ?s ?p1 ?bn .
+  ?bn ?p2 ?o .
+}
+INSERT {
+  ?s ?p1 ?nbn .
+  ?nbn ?p2 ?o .
+}
+WHERE {
+  {
+    SELECT ?bn (count(?s) as ?number)
+    WHERE {
+      ?s ?p ?bn
+      FILTER isBlank(?bn)
+    }
+    GROUP BY(?bn)
+  }
+  FILTER (?number > 1)
+  {
+    {
+      ?s ?p1 ?bn .
+      BIND (BNODE() as ?nbn)
+    }
+    ?bn ?p2 ?o 
+  }
+}

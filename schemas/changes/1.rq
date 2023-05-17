@@ -1,7 +1,4 @@
 # Change 1
-# https://github.com/Informatievlaanderen/OSLOthema-DCATAPVlaanderen/issues/13
-# Dataset - range of http://www.w3.org/ns/dcat#contactPoint incorrect
-
 
 PREFIX qb:   <http://purl.org/linked-data/cube#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -10,6 +7,18 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX vl:   <https://data.vlaanderen.be/ns/shacl#>
 PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
 
-DELETE {<https://data.vlaanderen.be/shacl/DCAT-AP-VL#DatasetShape/458062b0ae03c559426b85df3dd28e1c785acb0b> sh:class <http://schema.org/ContactPoint>}
-INSERT {<https://data.vlaanderen.be/shacl/DCAT-AP-VL#DatasetShape/458062b0ae03c559426b85df3dd28e1c785acb0b> sh:class v:Kind}
-WHERE {}
+# Don't validate if concept is member of the right vocab (external uris)
+INSERT {?rule sh:deactivated true . }
+WHERE {?rule sh:node/sh:property/sh:class skos:ConceptScheme} ;
+
+# Don't validate class membership for 'external' uris.
+INSERT {?rule sh:deactivated true . }
+WHERE {
+  VALUES (?class) {
+    # non exhaustive list, should check all...
+    (<http://purl.org/dc/terms/LicenseDocument>)
+    (<http://purl.org/dc/terms/Standard>)
+    (skos:Concept)
+  }
+  ?rule sh:class ?class .
+}

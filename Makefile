@@ -2,25 +2,23 @@ tracked-catalogs = $(wildcard catalogs/*)
 catalogs := $(subst catalogs, workspace/dcat, $(tracked-catalogs))
 catalogs-dcat-rdf := $(patsubst %,%/validated.nt,$(catalogs))
 
-workspace/catalog.nt: $(catalogs-dcat-rdf)
-	cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog.nt
+workspace/catalog.rdf.xml: workspace/catalog.ttl
+	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > workspace/catalog.rdf.xml
 
-workspace/dcat/%/validated.nt: workspace/dcat/%/inferred.nt schemas/dcatapvl.ttl
+workspace/catalog.ttl: $(catalogs-dcat-rdf) schemas/infer/catalog.ttl schemas/infer/1.rq schemas/infer/bnode-duplicator.rq
+	#cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
+	cat schemas/infer/catalog.ttl | apache-jena/bin/turtle --output=ntriples | cat - $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
+	./apache-jena/bin/update --data workspace/catalog-raw.nt --update schemas/infer/1.rq --dump > workspace/catalog.0.ttl
+	# 'tree'ify the graph (blank nodes are duplicated if they occur multiple times in object poisition.
+	# We should apply this tranformation until no changes are made. For now, just run it a few times.
+	./apache-jena/bin/update --data workspace/catalog.0.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.1.ttl
+	./apache-jena/bin/update --data workspace/catalog.1.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.2.ttl
+	./apache-jena/bin/update --data workspace/catalog.2.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.3.ttl
+	./apache-jena/bin/update --data workspace/catalog.3.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.4.ttl
+	./apache-jena/bin/update --data workspace/catalog.4.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.ttl
+
+workspace/dcat/%/validated.nt: workspace/dcat/%/normalised.nt schemas/dcatapvl.ttl
 	./bin/validate.sh $(*F)
-
-workspace/dcat/%/inferred.nt: workspace/dcat/%/infer-2.nt
-	cp $(<) $(<D)/inferred.nt
-
-
-#workspace/dcat/%/infer-3.nt: workspace/dcat/%/infer-2.nt schemas/infer/3.rq
-#	 ./apache-jena/bin/update --data $(<) --file schemas/infer/3.rq --dump > $@
-
-workspace/dcat/%/infer-2.nt: workspace/dcat/%/infer-1.nt schemas/infer/2.rq
-	./apache-jena/bin/update --data $(<) --update schemas/infer/2.rq --dump | ./apache-jena/bin/turtle > $@
-
-workspace/dcat/%/infer-1.nt: workspace/dcat/%/normalised.nt schemas/infer/1.rq
-	mkdir -p schemas/infer
-	./apache-jena/bin/update --data $(<) --update schemas/infer/1.rq --dump | ./apache-jena/bin/turtle > $@
 
 workspace/dcat/%/normalised.nt: workspace/dcat/%/original apache-jena bin/normalise.sh
 	./bin/normalise.sh $(*F)
@@ -29,26 +27,8 @@ workspace/dcat/%/original: catalogs/% ./bin/download.sh
 	mkdir -p workspace/dcat/$(*F)
 	./bin/download.sh $(^) > $@
 
-schemas/dcatapvl.ttl: workspace/schema/7.ttl
-	cp workspace/schema/7.ttl schemas/dcatapvl.ttl
-
-workspace/schema/7.ttl: workspace/schema/6.ttl schemas/changes/7.rq
-	./apache-jena/bin/update --data workspace/schema/6.ttl --update schemas/changes/7.rq --dump > workspace/schema/7.ttl
-
-workspace/schema/6.ttl: workspace/schema/5.ttl schemas/changes/6.rq
-	./apache-jena/bin/update --data workspace/schema/5.ttl --update schemas/changes/6.rq --dump > workspace/schema/6.ttl
-
-workspace/schema/5.ttl: workspace/schema/4.ttl schemas/changes/5.rq
-	./apache-jena/bin/update --data workspace/schema/4.ttl --update schemas/changes/5.rq --dump > workspace/schema/5.ttl
-
-workspace/schema/4.ttl: workspace/schema/3.ttl schemas/changes/4.rq
-	./apache-jena/bin/update --data workspace/schema/3.ttl --update schemas/changes/4.rq --dump > workspace/schema/4.ttl
-
-workspace/schema/3.ttl: workspace/schema/2.ttl schemas/changes/3.rq
-	./apache-jena/bin/update --data workspace/schema/2.ttl --update schemas/changes/3.rq --dump > workspace/schema/3.ttl
-
-workspace/schema/2.ttl: workspace/schema/1.ttl schemas/changes/2.rq
-	./apache-jena/bin/update --data workspace/schema/1.ttl --update schemas/changes/2.rq --dump > workspace/schema/2.ttl
+schemas/dcatapvl.ttl: schemas/dcatap-normalised.ttl workspace/schema/1.ttl
+	cp workspace/schema/1.ttl schemas/dcatapvl.ttl
 
 workspace/schema/1.ttl: schemas/dcatap-normalised.ttl schemas/changes/1.rq
 	mkdir -p workspace/schema
@@ -59,7 +39,7 @@ schemas/dcatap-normalised.ttl: schemas/dcatapvl.jsonld
 
 schemas/dcatapvl.jsonld:
 	mkdir -p schemas
-	wget https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-metadataVoorServices/validation/release/dcatapvl.jsonld -O schemas/dcatapvl.jsonld
+	wget https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-metadataVoorServices/a223ae23bfc88691e0bd2cf77b9ff1e95a1a6f57/release/dcatapvl.jsonld -O schemas/dcatapvl.jsonld
 
 expire:
 	#       Mark all tracked catalogs older than a day for processing.

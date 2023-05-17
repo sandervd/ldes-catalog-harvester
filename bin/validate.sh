@@ -1,7 +1,7 @@
 #!/bin/bash -e
 catalog=${1%/*}
 set +e
-(set -E ; trap 'exit 1' ERR ; ./shacl/bin/shaclvalidate.sh -datafile workspace/dcat/$catalog/inferred.nt -shapesfile schemas/dcatapvl.ttl > workspace/dcat/$catalog/report.ttl)
+(set -E ; trap 'exit 1' ERR ; ./shacl/bin/shaclvalidate.sh -datafile workspace/dcat/$catalog/normalised.nt -shapesfile schemas/dcatapvl.ttl > workspace/dcat/$catalog/report.ttl)
 if [ $? -ne 0 ]
 then
 	# Catalog is not conformant.
