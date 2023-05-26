@@ -2,10 +2,10 @@ tracked-catalogs = $(wildcard catalogs/*)
 catalogs := $(subst catalogs, workspace/dcat, $(tracked-catalogs))
 catalogs-dcat-rdf := $(patsubst %,%/validated.nt,$(catalogs))
 
-workspace/catalog.rdf.xml: workspace/catalog.ttl
+workspace/catalog.rdf.xml: apache-jena workspace/catalog.ttl
 	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > workspace/catalog.rdf.xml
 
-workspace/catalog.ttl: $(catalogs-dcat-rdf) schemas/infer/catalog.ttl schemas/infer/1.rq schemas/infer/bnode-duplicator.rq
+workspace/catalog.ttl: apache-jena $(catalogs-dcat-rdf) schemas/infer/catalog.ttl schemas/infer/1.rq schemas/infer/bnode-duplicator.rq
 	#cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
 	cat schemas/infer/catalog.ttl | apache-jena/bin/turtle --output=ntriples | cat - $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
 	./apache-jena/bin/update --data workspace/catalog-raw.nt --update schemas/infer/1.rq --dump > workspace/catalog.0.ttl
@@ -30,11 +30,11 @@ workspace/dcat/%/original: catalogs/% ./bin/download.sh
 schemas/dcatapvl.ttl: schemas/dcatap-normalised.ttl workspace/schema/1.ttl
 	cp workspace/schema/1.ttl schemas/dcatapvl.ttl
 
-workspace/schema/1.ttl: schemas/dcatap-normalised.ttl schemas/changes/1.rq
+workspace/schema/1.ttl: apache-jena schemas/dcatap-normalised.ttl schemas/changes/1.rq
 	mkdir -p workspace/schema
 	./apache-jena/bin/update --data schemas/dcatap-normalised.ttl --update schemas/changes/1.rq --dump > workspace/schema/1.ttl
 
-schemas/dcatap-normalised.ttl: schemas/dcatapvl.jsonld
+schemas/dcatap-normalised.ttl: apache-jena schemas/dcatapvl.jsonld
 	./apache-jena/bin/riot --formatted=turtle schemas/dcatapvl.jsonld > schemas/dcatap-normalised.ttl
 
 schemas/dcatapvl.jsonld:
