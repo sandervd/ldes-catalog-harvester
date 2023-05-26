@@ -17,7 +17,7 @@ workspace/catalog.ttl: apache-jena $(catalogs-dcat-rdf) schemas/infer/catalog.tt
 	./apache-jena/bin/update --data workspace/catalog.3.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.4.ttl
 	./apache-jena/bin/update --data workspace/catalog.4.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.ttl
 
-workspace/dcat/%/validated.nt: workspace/dcat/%/normalised.nt schemas/dcatapvl.ttl
+workspace/dcat/%/validated.nt: shacl workspace/dcat/%/normalised.nt schemas/dcatapvl.ttl
 	./bin/validate.sh $(*F)
 
 workspace/dcat/%/normalised.nt: workspace/dcat/%/original apache-jena bin/normalise.sh
