@@ -47,7 +47,7 @@ expire:
 
 apache-jena:
 	rm -f apache-jena
-	wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.6.1.zip -O apache-jena.zip
+	wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.8.0.zip -O apache-jena.zip
 	unzip apache-jena.zip
 	rm apache-jena.zip
 	ln -s apache-jena-* apache-jena
