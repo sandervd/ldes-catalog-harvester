@@ -2,8 +2,8 @@ tracked-catalogs = $(wildcard catalogs/*)
 catalogs := $(subst catalogs, workspace/dcat, $(tracked-catalogs))
 catalogs-dcat-rdf := $(patsubst %,%/validated.nt,$(catalogs))
 
-workspace/catalog.rdf.xml: apache-jena workspace/catalog.ttl
-	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > workspace/catalog.rdf.xml
+workspace/catalog.rdf: apache-jena workspace/catalog.ttl
+	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > workspace/catalog.rdf
 
 workspace/catalog.ttl: apache-jena $(catalogs-dcat-rdf) schemas/infer/catalog.ttl schemas/infer/1.rq schemas/infer/bnode-duplicator.rq
 	#cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
