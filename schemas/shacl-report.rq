@@ -1,0 +1,17 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+SELECT ?shape ?path ?node ?component ?message ?value
+WHERE {
+	?res a sh:ValidationResult .
+  # Required properties
+	?res sh:focusNode ?node .
+	?res sh:resultSeverity sh:Violation .
+	?res sh:sourceConstraintComponent ?component .
+  # Optional
+  OPTIONAL { ?res sh:resultMessage ?message } .
+  OPTIONAL { ?res sh:resultPath ?path } .
+  OPTIONAL { ?res sh:sourceShape ?shape } .
+  OPTIONAL { ?res sh:value ?value } .
+}
+GROUP BY ?shape ?path ?message ?node ?component ?value
+ORDER BY ?shape ?path

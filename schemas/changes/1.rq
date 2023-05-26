@@ -1,0 +1,24 @@
+# Change 1
+
+PREFIX qb:   <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sh:   <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX vl:   <https://data.vlaanderen.be/ns/shacl#>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
+
+# Don't validate if concept is member of the right vocab (external uris)
+INSERT {?rule sh:deactivated true . }
+WHERE {?rule sh:node/sh:property/sh:class skos:ConceptScheme} ;
+
+# Don't validate class membership for 'external' uris.
+INSERT {?rule sh:deactivated true . }
+WHERE {
+  VALUES (?class) {
+    # non exhaustive list, should check all...
+    (<http://purl.org/dc/terms/LicenseDocument>)
+    (<http://purl.org/dc/terms/Standard>)
+    (skos:Concept)
+  }
+  ?rule sh:class ?class .
+}
