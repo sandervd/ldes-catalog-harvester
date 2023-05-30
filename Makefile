@@ -2,20 +2,25 @@ tracked-catalogs = $(wildcard catalogs/*)
 catalogs := $(subst catalogs, workspace/dcat, $(tracked-catalogs))
 catalogs-dcat-rdf := $(patsubst %,%/validated.nt,$(catalogs))
 
-workspace/catalog.rdf: apache-jena workspace/catalog.ttl
-	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > workspace/catalog.rdf
+publications/beta.catalog.rdf: apache-jena workspace/catalog.ttl
+	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > publications/beta.catalog.rdf
+
+# Release current catalogue to production.
+publications/prod.catalog.rdf:
+	cp publications/beta.catalog.rdf publications/prod.catalog.rdf
 
 workspace/catalog.ttl: apache-jena $(catalogs-dcat-rdf) schemas/infer/catalog.ttl schemas/infer/1.rq schemas/infer/bnode-duplicator.rq
 	#cat $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
 	cat schemas/infer/catalog.ttl | apache-jena/bin/turtle --output=ntriples | cat - $(catalogs-dcat-rdf) 2>/dev/null > workspace/catalog-raw.nt
 	./apache-jena/bin/update --data workspace/catalog-raw.nt --update schemas/infer/1.rq --dump > workspace/catalog.0.ttl
+	./apache-jena/bin/update --data workspace/catalog.0.ttl --update schemas/infer/2.rq --dump > workspace/catalog.1.ttl
 	# 'tree'ify the graph (blank nodes are duplicated if they occur multiple times in object poisition.
 	# We should apply this tranformation until no changes are made. For now, just run it a few times.
-	./apache-jena/bin/update --data workspace/catalog.0.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.1.ttl
 	./apache-jena/bin/update --data workspace/catalog.1.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.2.ttl
 	./apache-jena/bin/update --data workspace/catalog.2.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.3.ttl
 	./apache-jena/bin/update --data workspace/catalog.3.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.4.ttl
-	./apache-jena/bin/update --data workspace/catalog.4.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.ttl
+	./apache-jena/bin/update --data workspace/catalog.4.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.5.ttl
+	./apache-jena/bin/update --data workspace/catalog.5.ttl --update schemas/infer/bnode-duplicator.rq --dump > workspace/catalog.ttl
 
 workspace/dcat/%/validated.nt: shacl workspace/dcat/%/normalised.nt schemas/dcatapvl.ttl
 	./bin/validate.sh $(*F)
@@ -47,6 +52,7 @@ expire:
 
 apache-jena:
 	rm -f apache-jena
+	# VERSION=`curl https://dlcdn.apache.org/jena/binaries/ 2>/dev/null| sed -n "s/^.*<a href=\"apache-jena-\([[:digit:]].[[:digit:]].[[:digit:]]\).zip\">.*$/\1/p"`
 	wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.8.0.zip -O apache-jena.zip
 	unzip apache-jena.zip
 	rm apache-jena.zip

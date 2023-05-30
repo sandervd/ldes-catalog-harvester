@@ -2,17 +2,37 @@ prefix qb:   <http://purl.org/linked-data/cube#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 prefix sh:   <http://www.w3.org/ns/shacl#> 
 prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+prefix schema: <http://schema.org/> 
 prefix v:    <http://www.w3.org/2006/vcard/ns#> 
 prefix vl:   <https://data.vlaanderen.be/ns/shacl#> 
 prefix dcat: <http://www.w3.org/ns/dcat#> 
 prefix dct:  <http://purl.org/dc/terms/>
 
-INSERT {
-	<htts://data.vlaanderen.be/id/catalog/vsds> dcat:dataset ?dataset .
-	<htts://data.vlaanderen.be/id/catalog/vsds> dcat:dataservice ?dataservice .
+DELETE {
+  ?id a ?type
 }
 WHERE {
-	{?dataset a dcat:Dataset }
-	{?dataservice a dcat:DataService }
+  VALUES (?types) {
+    (dcat:Catalog)
+    (dcat:CatalogRecord)
+    (dcat:DataService)
+    (dcat:Dataset)
+    (dcat:Distribution)
+    (dcat:Relationship)
+    (dcat:Resource)
+    (dcat:Role)
+    (dct:Agent)
+    (v:Kind)
+    (v:Organization)
+    (schema:ContactPoint)
+    (dct:ProvenanceStatement)
+    (dct:RightsStatement)
+    (dct:LicenseDocument)
+    (dct:Location)
+    (dct:Standard)
+  }
+  ?id a ?types .
+  ?id a ?type .
+  FILTER(?type NOT IN (?types)) .
 }
 

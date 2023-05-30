@@ -7,6 +7,9 @@ prefix vl:   <https://data.vlaanderen.be/ns/shacl#>
 prefix dcat: <http://www.w3.org/ns/dcat#> 
 prefix dct:  <http://purl.org/dc/terms/>
 
+# The catalogue is defined in schemas/infer/catalog.ttl .
+# This query adds references from the catalogue to all defined
+# datasets and services.
 INSERT {
 	<htts://data.vlaanderen.be/id/catalog/vsds> dcat:dataset ?dataset .
 	<htts://data.vlaanderen.be/id/catalog/vsds> dcat:service ?dataservice .

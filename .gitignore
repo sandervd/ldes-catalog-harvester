@@ -1,0 +1,7 @@
+shacl
+shacl/*
+shacl-*/*
+apache-jena
+apache-jena*/*
+workspace
+publications/beta.catalog.rdf
