@@ -15,17 +15,27 @@
   <dcat:Catalog rdf:about="htts://data.vlaanderen.be/id/catalog/vsds">
     <dcat:service>
       <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_mregions">
+        <dcat:contactPoint>
+          <v:Kind>
+            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+            <v:hasURL>https://www.marineregions.org/</v:hasURL>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+            <v:hasAdress>
+              <v:Address>
+                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                <v:postal-code>8400</v:postal-code>
+                <v:locality>Ostend</v:locality>
+                <v:countryname>Belgium</v:countryname>
+              </v:Address>
+            </v:hasAdress>
+            <v:fn>Marine Regions Data Management team</v:fn>
+          </v:Kind>
+        </dcat:contactPoint>
         <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
         <dcat:endpointDescription rdf:resource="https://docs.ropensci.org/mregions/index.html"/>
         <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
         <dcat:servesDataset>
           <dcat:Dataset rdf:about="https://marineinfo.org/id/dataset/1426">
-            <dct:temporal>
-              <dct:PeriodOfTime>
-                <schema:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-                >2010-12-08T00:00:00Z</schema:startDate>
-              </dct:PeriodOfTime>
-            </dct:temporal>
             <dcat:keyword xml:lang="en">spatial</dcat:keyword>
             <dct:description xml:lang="en">The Marine Regions gazetteer is a standard list of marine geographical place names and locations.&#xD;
 			Objects from different sources (authoritative databases, ecological classifications,...) are integrated into one database.&#xD;
@@ -56,46 +66,55 @@
               </dct:Agent>
             </dct:publisher>
             <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
+            <dct:temporal>
+              <dct:PeriodOfTime>
+                <schema:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+                >2010-12-08T00:00:00Z</schema:startDate>
+              </dct:PeriodOfTime>
+            </dct:temporal>
             <dcat:keyword xml:lang="en">marine</dcat:keyword>
             <dcat:keyword xml:lang="en">location</dcat:keyword>
             <dcat:keyword xml:lang="en">Geography</dcat:keyword>
             <dcat:keyword xml:lang="en">linked data</dcat:keyword>
+            <dcat:contactPoint>
+              <v:Kind>
+                <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+                <v:hasURL>https://www.marineregions.org/</v:hasURL>
+                <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+                <v:hasAdress>
+                  <v:Address>
+                    <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                    <v:postal-code>8400</v:postal-code>
+                    <v:locality>Ostend</v:locality>
+                    <v:countryname>Belgium</v:countryname>
+                  </v:Address>
+                </v:hasAdress>
+                <v:fn>Marine Regions Data Management team</v:fn>
+              </v:Kind>
+            </dcat:contactPoint>
             <dct:creator rdf:resource="https://ror.org/0496vr396"/>
             <dcat:keyword xml:lang="en">Charts (maps)</dcat:keyword>
             <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
             >2007-08-16T00:00:00</dct:created>
             <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php"/>
+            <dct:spatial>
+              <dct:Location>
+                <loc:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"
+                >&lt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&gt; POLYGON ((&#xD;
+			-180.0^^xsd:float	-90.0^^xsd:float&#xD;
+			180.0^^xsd:float	90.0^^xsd:float&#xD;
+		))</loc:geometry>
+              </dct:Location>
+            </dct:spatial>
             <dct:isPartOf>
               <dcat:Dataset rdf:about="https://marineinfo.org/id/dataset/6293">
                 <dcat:keyword xml:lang="en">Biogeography</dcat:keyword>
                 <dcat:keyword xml:lang="en">Territorial waters</dcat:keyword>
                 <dct:identifier>doi:10.1080/01490419.2014.902881</dct:identifier>
-                <dcat:contactPoint>
-                  <v:Kind>
-                    <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-                    <v:hasURL>https://www.marineregions.org/</v:hasURL>
-                    <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-                    <v:hasAdress>
-                      <v:Address>
-                        <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                        <v:postal-code>8400</v:postal-code>
-                        <v:locality>Ostend</v:locality>
-                        <v:countryname>Belgium</v:countryname>
-                      </v:Address>
-                    </v:hasAdress>
-                    <v:fn>Marine Regions Data Management team</v:fn>
-                  </v:Kind>
-                </dcat:contactPoint>
                 <dcat:theme>
                   <skos:Concept>
                     <skos:related rdf:resource="https://inspire.ec.europa.eu/theme/br"/>
                     <skos:prefLabel xml:lang="en">Bio-geographical regions</skos:prefLabel>
-                  </skos:Concept>
-                </dcat:theme>
-                <dcat:theme>
-                  <skos:Concept>
-                    <skos:related rdf:resource="https://inspire.ec.europa.eu/theme/gn"/>
-                    <skos:prefLabel xml:lang="en">Geographical names</skos:prefLabel>
                   </skos:Concept>
                 </dcat:theme>
                 <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
@@ -118,9 +137,31 @@
 			The Marine Regions database builds further on an integration of the VLIMAR Gazetteer (place names) and the VLIZ Maritime Boundaries Geodatabase (polygons for sea areas).&#xD;
 			Funding for the creation of the VLIMAR gazetteer was provided initially through the EU Network of Excellence MarBEF, funding for the further development and maintenance of Marine Regions is provided by Research Foundation - Flanders (FWO) as part of the Belgian contribution to LifeWatch.&#xD;
 			</dct:description>
+                <dcat:theme>
+                  <skos:Concept>
+                    <skos:related rdf:resource="https://inspire.ec.europa.eu/theme/gn"/>
+                    <skos:prefLabel xml:lang="en">Geographical names</skos:prefLabel>
+                  </skos:Concept>
+                </dcat:theme>
                 <dct:publisher rdf:resource="https://ror.org/0496vr396"/>
                 <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
                 <dcat:keyword xml:lang="en">World Oceans</dcat:keyword>
+                <dcat:contactPoint>
+                  <v:Kind>
+                    <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+                    <v:hasURL>https://www.marineregions.org/</v:hasURL>
+                    <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+                    <v:hasAdress>
+                      <v:Address>
+                        <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                        <v:postal-code>8400</v:postal-code>
+                        <v:locality>Ostend</v:locality>
+                        <v:countryname>Belgium</v:countryname>
+                      </v:Address>
+                    </v:hasAdress>
+                    <v:fn>Marine Regions Data Management team</v:fn>
+                  </v:Kind>
+                </dcat:contactPoint>
                 <dcat:keyword xml:lang="en">Contiguous zones</dcat:keyword>
                 <dcat:keyword xml:lang="en">World Waters</dcat:keyword>
                 <dcat:endpointURL rdf:resource="https://www.marineregions.org"/>
@@ -128,56 +169,15 @@
             </dct:isPartOf>
             <dcat:keyword xml:lang="en">gazetteer</dcat:keyword>
             <dcat:keyword xml:lang="en">Information systems</dcat:keyword>
-            <dcat:contactPoint>
-              <v:Kind>
-                <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-                <v:hasURL>https://www.marineregions.org/</v:hasURL>
-                <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-                <v:hasAdress>
-                  <v:Address>
-                    <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                    <v:postal-code>8400</v:postal-code>
-                    <v:locality>Ostend</v:locality>
-                    <v:countryname>Belgium</v:countryname>
-                  </v:Address>
-                </v:hasAdress>
-                <v:fn>Marine Regions Data Management team</v:fn>
-              </v:Kind>
-            </dcat:contactPoint>
             <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
             <dct:identifier>doi:10.14284/561</dct:identifier>
             <dct:title xml:lang="en">Marine Regions gazetteer</dct:title>
-            <dct:spatial>
-              <dct:Location>
-                <loc:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"
-                >&lt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&gt; POLYGON ((&#xD;
-			-180.0^^xsd:float	-90.0^^xsd:float&#xD;
-			180.0^^xsd:float	90.0^^xsd:float&#xD;
-		))</loc:geometry>
-              </dct:Location>
-            </dct:spatial>
             <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
             <dcat:keyword xml:lang="en">semantic</dcat:keyword>
           </dcat:Dataset>
         </dcat:servesDataset>
         <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_mregions</dct:identifier>
         <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
-        <dcat:contactPoint>
-          <v:Kind>
-            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-            <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-            <v:hasAdress>
-              <v:Address>
-                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                <v:postal-code>8400</v:postal-code>
-                <v:locality>Ostend</v:locality>
-                <v:countryname>Belgium</v:countryname>
-              </v:Address>
-            </v:hasAdress>
-            <v:fn>Marine Regions Data Management team</v:fn>
-          </v:Kind>
-        </dcat:contactPoint>
         <dcat:endpointURL rdf:resource="https://cran.r-project.org/web/packages/mregions/"/>
         <dct:title xml:lang="en">R package mregions</dct:title>
       </dcat:DataService>
@@ -191,13 +191,11 @@
         <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
         <dct:title xml:lang="en">Marine Regions OGC service</dct:title>
         <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_OGCservice</dct:identifier>
-        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
-        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
         <dcat:contactPoint>
           <v:Kind>
             <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
             <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
             <v:hasAdress>
               <v:Address>
                 <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
@@ -209,28 +207,14 @@
             <v:fn>Marine Regions Data Management team</v:fn>
           </v:Kind>
         </dcat:contactPoint>
+        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
+        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
         <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
       </dcat:DataService>
     </dcat:service>
     <dcat:service>
       <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_LDES">
         <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
-        <dcat:contactPoint>
-          <v:Kind>
-            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-            <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-            <v:hasAdress>
-              <v:Address>
-                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                <v:postal-code>8400</v:postal-code>
-                <v:locality>Ostend</v:locality>
-                <v:countryname>Belgium</v:countryname>
-              </v:Address>
-            </v:hasAdress>
-            <v:fn>Marine Regions Data Management team</v:fn>
-          </v:Kind>
-        </dcat:contactPoint>
         <dct:conformsTo rdf:resource="https://data.vlaanderen.be/id/concept/dataserviceprotocol/LDES"/>
         <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
         <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
@@ -238,20 +222,11 @@
         <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_LDES</dct:identifier>
         <dcat:endpointURL rdf:resource="https://www.marineregions.org/feed"/>
         <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
-        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
-      </dcat:DataService>
-    </dcat:service>
-    <dcat:service>
-      <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_RESTservice">
-        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
-        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
-        <dcat:endpointURL rdf:resource="https://www.marineregions.org/rest/"/>
-        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
         <dcat:contactPoint>
           <v:Kind>
             <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
             <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
             <v:hasAdress>
               <v:Address>
                 <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
@@ -263,6 +238,31 @@
             <v:fn>Marine Regions Data Management team</v:fn>
           </v:Kind>
         </dcat:contactPoint>
+        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
+      </dcat:DataService>
+    </dcat:service>
+    <dcat:service>
+      <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_RESTservice">
+        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+        <dcat:contactPoint>
+          <v:Kind>
+            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+            <v:hasURL>https://www.marineregions.org/</v:hasURL>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+            <v:hasAdress>
+              <v:Address>
+                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                <v:postal-code>8400</v:postal-code>
+                <v:locality>Ostend</v:locality>
+                <v:countryname>Belgium</v:countryname>
+              </v:Address>
+            </v:hasAdress>
+            <v:fn>Marine Regions Data Management team</v:fn>
+          </v:Kind>
+        </dcat:contactPoint>
+        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
+        <dcat:endpointURL rdf:resource="https://www.marineregions.org/rest/"/>
+        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
         <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_RESTservice</dct:identifier>
         <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
         <dct:title xml:lang="en">Marine Regions RESTful service</dct:title>
@@ -271,17 +271,11 @@
     </dcat:service>
     <dcat:service>
       <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_SOAPservice">
-        <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=soap&amp;wsdl=1"/>
-        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
-        <dct:title xml:lang="en">Marine Regions SOAP service </dct:title>
-        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
-        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
-        <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
         <dcat:contactPoint>
           <v:Kind>
             <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
             <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
             <v:hasAdress>
               <v:Address>
                 <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
@@ -293,6 +287,12 @@
             <v:fn>Marine Regions Data Management team</v:fn>
           </v:Kind>
         </dcat:contactPoint>
+        <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=soap&amp;wsdl=1"/>
+        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+        <dct:title xml:lang="en">Marine Regions SOAP service </dct:title>
+        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
+        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
+        <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
         <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_SOAPservice</dct:identifier>
         <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
       </dcat:DataService>
@@ -301,95 +301,30 @@
       <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_browsepage">
         <dct:title xml:lang="en">Hierarchical tree gazetteer</dct:title>
         <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+        <dcat:contactPoint>
+          <v:Kind>
+            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+            <v:hasURL>https://www.marineregions.org/</v:hasURL>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+            <v:hasAdress>
+              <v:Address>
+                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                <v:postal-code>8400</v:postal-code>
+                <v:locality>Ostend</v:locality>
+                <v:countryname>Belgium</v:countryname>
+              </v:Address>
+            </v:hasAdress>
+            <v:fn>Marine Regions Data Management team</v:fn>
+          </v:Kind>
+        </dcat:contactPoint>
         <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
         <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_browsepage</dct:identifier>
         <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
         <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=browser"/>
         <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
-        <dcat:contactPoint>
-          <v:Kind>
-            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-            <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-            <v:hasAdress>
-              <v:Address>
-                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                <v:postal-code>8400</v:postal-code>
-                <v:locality>Ostend</v:locality>
-                <v:countryname>Belgium</v:countryname>
-              </v:Address>
-            </v:hasAdress>
-            <v:fn>Marine Regions Data Management team</v:fn>
-          </v:Kind>
-        </dcat:contactPoint>
         <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
       </dcat:DataService>
     </dcat:service>
-    <dct:identifier>htts://data.vlaanderen.be/id/catalog/vsds</dct:identifier>
-    <dct:title xml:lang="nl">Vlaamse Smart Data Space datasets</dct:title>
-    <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
-    <dcat:service>
-      <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_searchpage">
-        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
-        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
-        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
-        <dct:title xml:lang="en">Search page gazetteer</dct:title>
-        <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=search"/>
-        <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_searchpage</dct:identifier>
-        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
-        <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
-        <dcat:contactPoint>
-          <v:Kind>
-            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-            <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-            <v:hasAdress>
-              <v:Address>
-                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                <v:postal-code>8400</v:postal-code>
-                <v:locality>Ostend</v:locality>
-                <v:countryname>Belgium</v:countryname>
-              </v:Address>
-            </v:hasAdress>
-            <v:fn>Marine Regions Data Management team</v:fn>
-          </v:Kind>
-        </dcat:contactPoint>
-      </dcat:DataService>
-    </dcat:service>
-    <dcat:service>
-      <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_GeoRSS">
-        <dcat:contactPoint>
-          <v:Kind>
-            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
-            <v:hasURL>https://www.marineregions.org/</v:hasURL>
-            <v:hasEmail rdf:resource="file:///home/sander/Projects/dcat-ap-vl-validator/workspace/dcat/https%253A%252F%252Fessentialcomplexity.eu%252Fmarineregions.ttl/info@marineregions.org"/>
-            <v:hasAdress>
-              <v:Address>
-                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
-                <v:postal-code>8400</v:postal-code>
-                <v:locality>Ostend</v:locality>
-                <v:countryname>Belgium</v:countryname>
-              </v:Address>
-            </v:hasAdress>
-            <v:fn>Marine Regions Data Management team</v:fn>
-          </v:Kind>
-        </dcat:contactPoint>
-        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
-        <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
-        <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_GeoRSS</dct:identifier>
-        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
-        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
-        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
-        <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=rss"/>
-        <dct:title xml:lang="en">Marine Regions GeoRSS</dct:title>
-      </dcat:DataService>
-    </dcat:service>
-    <dcat:dataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
-    <dct:publisher>
-      <dct:Agent>
-        <foaf:name xml:lang="nl">Digitaal Vlaanderen</foaf:name>
-      </dct:Agent>
-    </dct:publisher>
     <dcat:contactPoint>
       <v:Kind>
         <v:organizationname xml:lang="nl">Digitaal Vlaanderen</v:organizationname>
@@ -397,5 +332,70 @@
         <v:hasEmail rdf:resource="http://base/vsds@vlaanderen.be"/>
       </v:Kind>
     </dcat:contactPoint>
+    <dct:identifier>htts://data.vlaanderen.be/id/catalog/vsds</dct:identifier>
+    <dct:publisher>
+      <dct:Agent>
+        <foaf:name xml:lang="nl">Digitaal Vlaanderen</foaf:name>
+      </dct:Agent>
+    </dct:publisher>
+    <dct:title xml:lang="nl">Vlaamse Smart Data Space datasets</dct:title>
+    <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
+    <dcat:service>
+      <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_searchpage">
+        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
+        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
+        <dcat:contactPoint>
+          <v:Kind>
+            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+            <v:hasURL>https://www.marineregions.org/</v:hasURL>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+            <v:hasAdress>
+              <v:Address>
+                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                <v:postal-code>8400</v:postal-code>
+                <v:locality>Ostend</v:locality>
+                <v:countryname>Belgium</v:countryname>
+              </v:Address>
+            </v:hasAdress>
+            <v:fn>Marine Regions Data Management team</v:fn>
+          </v:Kind>
+        </dcat:contactPoint>
+        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+        <dct:title xml:lang="en">Search page gazetteer</dct:title>
+        <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=search"/>
+        <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_searchpage</dct:identifier>
+        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
+        <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
+      </dcat:DataService>
+    </dcat:service>
+    <dcat:service>
+      <dcat:DataService rdf:about="https://marineinfo.org/id/dataset/1426#MR_GeoRSS">
+        <mdcat:statuut rdf:resource="https://metadata.vlaanderen.be/id/GDI-Vlaanderen-Trefwoorden/VLOPENDATASERVICE"/>
+        <dcat:endpointDescription rdf:resource="https://www.marineregions.org/gazetteer.php?p=webservices"/>
+        <dct:identifier>https://marineinfo.org/id/dataset/1426#MR_GeoRSS</dct:identifier>
+        <dct:license rdf:resource="https://data.vlaanderen.be/id/licentie/creative-commons-zero-verklaring/v1.0"/>
+        <dcat:servesDataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
+        <dcat:contactPoint>
+          <v:Kind>
+            <v:organizationname>Vlaams Instituut voor de Zee (VLIZ)</v:organizationname>
+            <v:hasURL>https://www.marineregions.org/</v:hasURL>
+            <v:hasEmail rdf:resource="mailto:info@marineregions.org"/>
+            <v:hasAdress>
+              <v:Address>
+                <v:streetaddress>Jacobsenstraat 1</v:streetaddress>
+                <v:postal-code>8400</v:postal-code>
+                <v:locality>Ostend</v:locality>
+                <v:countryname>Belgium</v:countryname>
+              </v:Address>
+            </v:hasAdress>
+            <v:fn>Marine Regions Data Management team</v:fn>
+          </v:Kind>
+        </dcat:contactPoint>
+        <dct:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+        <dcat:endpointURL rdf:resource="https://www.marineregions.org/gazetteer.php?p=rss"/>
+        <dct:title xml:lang="en">Marine Regions GeoRSS</dct:title>
+      </dcat:DataService>
+    </dcat:service>
+    <dcat:dataset rdf:resource="https://marineinfo.org/id/dataset/1426"/>
   </dcat:Catalog>
 </rdf:RDF>

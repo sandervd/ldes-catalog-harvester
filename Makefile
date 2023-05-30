@@ -6,7 +6,7 @@ publications/beta.catalog.rdf: apache-jena workspace/catalog.ttl
 	 ./apache-jena/bin/turtle --formatted=rdfxml workspace/catalog.ttl > publications/beta.catalog.rdf
 
 # Release current catalogue to production.
-publications/prod.catalog.rdf:
+publications/prod.catalog.rdf: publications/beta.catalog.rdf
 	cp publications/beta.catalog.rdf publications/prod.catalog.rdf
 
 workspace/catalog.ttl: apache-jena $(catalogs-dcat-rdf) schemas/infer/catalog.ttl schemas/infer/1.rq schemas/infer/bnode-duplicator.rq
