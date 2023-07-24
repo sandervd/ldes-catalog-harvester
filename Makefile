@@ -51,12 +51,7 @@ expire:
 	find catalogs/* -mmin +1440 -exec touch {}  \;
 
 apache-jena:
-	rm -f apache-jena
-	# VERSION=`curl https://dlcdn.apache.org/jena/binaries/ 2>/dev/null| sed -n "s/^.*<a href=\"apache-jena-\([[:digit:]].[[:digit:]].[[:digit:]]\).zip\">.*$/\1/p"`
-	wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.8.0.zip -O apache-jena.zip
-	unzip apache-jena.zip
-	rm apache-jena.zip
-	ln -s apache-jena-* apache-jena
+	./bin/download-jena.sh
 
 shacl:
 	# Download TopBraid SHALC validator.
